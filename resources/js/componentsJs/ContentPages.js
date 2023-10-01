@@ -1,6 +1,6 @@
 // Importar componentes 
-//import exemplo from "@PagesVuejs/components/ContentPages/exemplo.vue";
+import sidebarMenu from "@PagesVuejs/components/ContentPages/sidebarMenu.vue";
 
-const ContentPages = {  };
+const ContentPages = { sidebarMenu };
 
 export default ContentPages;
