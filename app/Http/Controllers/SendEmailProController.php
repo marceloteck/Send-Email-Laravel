@@ -27,7 +27,7 @@ class SendEmailProController extends Controller
     public function viewEmail()
     {
         return view('TemplatesEmail/CurriculoEmail', [
-            'teste' => 'aqui é teste',
+            'dadosUser' => professionalModel::all(),
         ]);
     }
     public function SendEmail(Request $request)
@@ -44,14 +44,14 @@ class SendEmailProController extends Controller
                 'facebook' => 'nullable|string',
             ]);
 
-            $professional = professionalModel::create($data);
+            professionalModel::create($data);
 
             return Inertia::render($this->editEmail, [
                 'resposta' => 'Cadastrado com sucesso!',
                 'status' => 'success'
             ]);
         } catch (\Throwable $th) {
-            return Inertia::render($this->indexEmail, [
+            return Inertia::render($this->editEmail, [
                 'resposta' => 'Não foi possivel cadastrar',
                 'status' => 'error'
             ]);

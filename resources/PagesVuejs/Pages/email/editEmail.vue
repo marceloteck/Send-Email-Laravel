@@ -5,7 +5,10 @@
         <div class="row">
             <div class="col-12 col-xl-3">
                 <div class="container card-item">
-                    <sidebarMenu />
+                    <sidebarMenu
+                        :resposta="props.resposta"
+                        :status="props.status"
+                    />
                 </div>
             </div>
             <div class="col-12 col-xl-9">
@@ -21,7 +24,9 @@
     </div>
 </template>
 
-<script setup></script>
+<script setup>
+const props = defineProps({ resposta: String, status: String });
+</script>
 
 <style lang="scss">
 .container {

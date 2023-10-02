@@ -1,47 +1,3 @@
-<script setup>
-import { ref } from "vue";
-import { useForm, router } from "@inertiajs/vue3";
-const props = defineProps({ resposta: String, status: String });
-
-const formSend = useForm({
-    name: "dsfsdaf",
-    job: "dsfsdaf",
-    email: "dsfsdaf",
-    whatsapp: "dsfsdaf",
-    codtecno: "dsfsdaf",
-    linkedin: "dsfsdaf",
-    github: "dsfsdaf",
-    facebook: "dsfsdaf",
-});
-
-const inputItens = [
-    { title: "Seu nome completo", name: "name" },
-    { title: "Seu cargo", name: "job" },
-    { title: "Email de contato", name: "email" },
-    { title: "Whatsapp", name: "whatsapp" },
-    { title: "Principais Tecnologias", name: "codtecno" },
-    { title: "Linkedin", name: "linkedin" },
-    { title: "GitHub", name: "github" },
-    { title: "Facebook", name: "facebook" },
-];
-
-const SubmitSend = () => {
-    try {
-        router.post(route("SendEmail"), formSend, {
-            onBefore: (visit) => {},
-            onStart: (visit) => {},
-            onProgress: (progress) => {},
-            onSuccess: (page) => {},
-            onError: (errors) => {},
-            onCancel: () => {},
-            onFinish: (visit) => {},
-        });
-    } catch (error) {
-        console.log("Atualize a página, ocorreu algum erro!");
-    }
-};
-</script>
-
 <template>
     <main>
         <form @submit.prevent="SubmitSend">
@@ -62,6 +18,70 @@ const SubmitSend = () => {
         </form>
     </main>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import { useForm, router } from "@inertiajs/vue3";
+const props = defineProps({ resposta: String, status: String });
+
+const formSend = useForm({
+    name: "",
+    job: "",
+    email: "",
+    whatsapp: "",
+    codtecno: "",
+    linkedin: "",
+    github: "",
+    facebook: "",
+});
+
+const inputItens = [
+    { title: "Seu nome completo", name: "name" },
+    { title: "Seu cargo", name: "job" },
+    { title: "Email de contato", name: "email" },
+    { title: "Principais Tecnologias", name: "codtecno" },
+    { title: "Whatsapp", name: "whatsapp" },
+    { title: "Linkedin", name: "linkedin" },
+    { title: "GitHub", name: "github" },
+    { title: "Facebook", name: "facebook" },
+];
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+});
+
+const SubmitSend = () => {
+    try {
+        router.post(route("SendEmail"), formSend, {
+            onBefore: (visit) => {},
+            onStart: (visit) => {},
+            onProgress: (progress) => {},
+            onSuccess: (page) => {
+                Toast.fire({ icon: props.status, title: props.resposta });
+            },
+            onError: (errors) => {
+                Toast.fire({ icon: props.status, title: props.resposta });
+            },
+            onCancel: () => {},
+            onFinish: (visit) => {},
+        });
+    } catch (error) {
+        Toast.fire({
+            icon: "error",
+            title: "Atualize a página, ocorreu algum erro!",
+        });
+    }
+};
+</script>
+
 <style lang="css">
 .group {
     position: relative;
@@ -150,7 +170,7 @@ label {
 .highlight {
     position: absolute;
     height: 60%;
-    width: 100px;
+    width: 100%;
     top: 25%;
     left: 0;
     pointer-events: none;
