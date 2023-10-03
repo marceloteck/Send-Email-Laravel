@@ -9,16 +9,18 @@ use Inertia\Inertia;
 
 class SendEmailProController extends Controller
 {
+    public $index;
     public $indexEmail;
     public $editEmail;
     public function __construct()
     {
+        $this->index = 'Pages/index/index';
         $this->editEmail = 'Pages/email/editEmail';
         $this->indexEmail = 'Pages/email/indexEmail';
     }
     public function index()
     {
-        return Inertia::render($this->indexEmail);
+        return Inertia::render($this->index);
     }
     public function editEmail()
     {

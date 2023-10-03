@@ -18,13 +18,33 @@
             >
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse d-flex justify-content-end " id="navbarNav">
+            <div
+                class="collapse navbar-collapse d-flex justify-content-end"
+                id="navbarNav"
+            >
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <Link class="nav-link active" aria-current="page" :href="route('index')">Inicio</Link>
+                        <Link
+                            class="nav-link active"
+                            aria-current="page"
+                            :href="route('index')"
+                            >Inicio</Link
+                        >
                     </li>
                     <li class="nav-item">
-                        <Link class="nav-link" :href="route('editingEmail')">Editar Email</Link>
+                        <Link class="nav-link" :href="route('editingEmail')"
+                            >Editar Email</Link
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" :href="route('editingEmail')"
+                            >Login</Link
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <Link class="nav-link" :href="route('editingEmail')"
+                            >Cadastrar</Link
+                        >
                     </li>
                 </ul>
             </div>
@@ -37,6 +57,9 @@
     a,
     Link {
         text-decoration: none;
+    }
+    .navbar-nav {
+        width: fit-content;
     }
 }
 </style>
