@@ -17,7 +17,7 @@
 
                 <input
                     v-model="form.email"
-                    type="text"
+                    type="email"
                     name="email"
                     id="email"
                     placeholder="Email"
@@ -54,32 +54,34 @@
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-    name: "",
-    email: "",
-    password: "",
-    password_confirmation: "",
+    name: "Marcelo de sousa henrique",
+    email: "marcellosh12@gmail.com",
+    password: "12345678",
+    password_confirmation: "12345678",
 });
 
 const erroInfo = () => {
-    if (form.errors.email) {
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: form.errors.email,
-        });
-    } else if (form.errors.password) {
-        Swal.fire({
-            icon: "error",
-            title: "Error",
-            text: form.errors.password,
-        });
-    } else {
-        Swal.fire({
-            icon: "success",
-            title: "sucesso",
-            text: "enviado com sucesso",
-        });
-    }
+    console.log(form);
+
+    // if (form.errors.email) {
+    //     Swal.fire({
+    //         icon: "error",
+    //         title: "Error",
+    //         text: form.errors.email,
+    //     });
+    // } else if (form.errors.password) {
+    //     Swal.fire({
+    //         icon: "error",
+    //         title: "Error",
+    //         text: form.errors.password,
+    //     });
+    // } else {
+    //     Swal.fire({
+    //         icon: "success",
+    //         title: "sucesso",
+    //         text: "enviado com sucesso",
+    //     });
+    // }
 };
 
 const submit = () => {
@@ -90,7 +92,7 @@ const submit = () => {
     erroInfo();
 };
 </script>
-<style lang="css" scope>
+<style lang="scss" scope>
 .mainLogin {
     position: relative;
     width: 100%;
@@ -119,6 +121,7 @@ const submit = () => {
     box-shadow: 0px 0px 10px 1px rgba(83, 83, 83, 0.8);
 }
 
+.login input[type="email"],
 .login input[type="text"],
 .login input[type="password"] {
     opacity: 1;
@@ -176,7 +179,8 @@ const submit = () => {
     transition: all 0.4s ease;
 }
 
-.login input[type="text"] {
+.login input[type="text"],
+.login input[type="email"] {
     animation: bounce 1s;
     -webkit-appearance: none;
 }
