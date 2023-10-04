@@ -37,12 +37,12 @@
                         >
                     </li>
                     <li class="nav-item">
-                        <Link class="nav-link" :href="route('editingEmail')"
+                        <Link class="nav-link" :href="route('login')"
                             >Login</Link
                         >
                     </li>
                     <li class="nav-item">
-                        <Link class="nav-link" :href="route('editingEmail')"
+                        <Link class="nav-link" :href="route('register')"
                             >Cadastrar</Link
                         >
                     </li>
