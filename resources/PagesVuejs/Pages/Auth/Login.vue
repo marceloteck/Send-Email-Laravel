@@ -29,12 +29,13 @@
                     :disabled="form.processing"
                 />
             </form>
+            <Link :href="route('register')">Não tem cadastro?</Link>
         </div>
     </main>
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { router, useForm } from "@inertiajs/vue3";
 
 defineProps({
     canResetPassword: {
@@ -52,17 +53,15 @@ const form = useForm({
 });
 
 const erroInfo = () => {
-    // console.log(form.errors);
-    // console.log("email:");
-    // console.log(form.errors.email);
-    // console.log("senha");
-    // console.log(form.errors.password);
-
     if (form.errors.email) {
+        const errors =
+            form.errors.email === "These credentials do not match our records."
+                ? "Email ou senha incorretos"
+                : form.errors.email;
         Swal.fire({
             icon: "error",
             title: "Error",
-            text: form.errors.email,
+            text: errors,
         });
     } else if (form.errors.password) {
         Swal.fire({
@@ -75,13 +74,15 @@ const erroInfo = () => {
 
 const submit = () => {
     form.post(route("login"), {
-        onFinish: () => form.reset("password"),
+        onFinish: () => {
+            form.reset("password");
+            erroInfo();
+        },
     });
-    erroInfo();
 };
 </script>
 
-<style lang="css" scope>
+<style lang="css" scoped>
 .mainLogin {
     position: relative;
     width: 100%;
@@ -128,7 +129,7 @@ const submit = () => {
 
 .login input:focus {
     animation: bounce 1s;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 .login input[type="submit"],
@@ -169,7 +170,7 @@ const submit = () => {
 
 .login input[type="text"] {
     animation: bounce 1s;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
 
 .login input[type="password"] {
@@ -179,7 +180,7 @@ const submit = () => {
 .ui {
     font-weight: bolder;
     background: -webkit-linear-gradient(#b563ff, #535efc, #0ec8ee);
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
     border-bottom: 4px solid transparent;
     border-image: linear-gradient(0.25turn, #535efc, #0ec8ee, #0ec8ee);

@@ -36,12 +36,12 @@
                             >Editar Email</Link
                         >
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="props.canLogin">
                         <Link class="nav-link" :href="route('login')"
                             >Login</Link
                         >
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="props.canRegister">
                         <Link class="nav-link" :href="route('register')"
                             >Cadastrar</Link
                         >
@@ -51,6 +51,11 @@
         </div>
     </nav>
 </template>
+
+<script setup>
+const props = defineProps(["canLogin", "canRegister"]);
+console.log(props.canRegister);
+</script>
 
 <style lang="scss">
 .container-fluid {

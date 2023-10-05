@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\professionalModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
@@ -20,7 +21,10 @@ class SendEmailProController extends Controller
     }
     public function index()
     {
-        return Inertia::render($this->index);
+        return Inertia::render($this->index, [
+            'canLogin' => Route::has('login'),
+            'canRegister' => Route::has('register'),
+        ]);
     }
     public function editEmail()
     {

@@ -3,7 +3,8 @@
     <navbar />
     <main class="mainLogin">
         <div class="login wrap">
-            <form @submit.prevent="submit">
+            <!-- <form @submit.prevent="submit"> -->
+            <form>
                 <div class="h1Ln">Cadastro</div>
                 <input
                     v-model="form.name"
@@ -41,12 +42,14 @@
                     required
                 />
                 <input
-                    type="submit"
+                    @click="submit"
+                    type="button"
                     value="Cadastrar"
                     :class="['btnLn', { 'opacity-25': form.processing }]"
                     :disabled="form.processing"
                 />
             </form>
+            <Link :href="route('login')">Login</Link>
         </div>
     </main>
 </template>
@@ -54,45 +57,38 @@
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-    name: "Marcelo de sousa henrique",
-    email: "marcellosh12@gmail.com",
-    password: "12345678",
-    password_confirmation: "12345678",
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
 });
 
 const erroInfo = () => {
-    console.log(form);
-
-    // if (form.errors.email) {
-    //     Swal.fire({
-    //         icon: "error",
-    //         title: "Error",
-    //         text: form.errors.email,
-    //     });
-    // } else if (form.errors.password) {
-    //     Swal.fire({
-    //         icon: "error",
-    //         title: "Error",
-    //         text: form.errors.password,
-    //     });
-    // } else {
-    //     Swal.fire({
-    //         icon: "success",
-    //         title: "sucesso",
-    //         text: "enviado com sucesso",
-    //     });
-    // }
+    if (form.errors.email) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: form.errors.email,
+        });
+    } else if (form.errors.password) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: form.errors.password,
+        });
+    }
 };
 
 const submit = () => {
     form.post(route("register"), {
-        onFinish: () => form.reset("password", "password_confirmation"),
+        onFinish: () => {
+            form.reset("password", "password_confirmation");
+            erroInfo();
+        },
     });
-
-    erroInfo();
 };
 </script>
-<style lang="scss" scope>
+<style lang="scss" scoped>
 .mainLogin {
     position: relative;
     width: 100%;
@@ -140,7 +136,7 @@ const submit = () => {
 
 .login input:focus {
     animation: bounce 1s;
-    -webkit-appearance: none;
+    // -webkit-appearance: none;
 }
 
 .login input[type="submit"],
@@ -182,7 +178,7 @@ const submit = () => {
 .login input[type="text"],
 .login input[type="email"] {
     animation: bounce 1s;
-    -webkit-appearance: none;
+    // -webkit-appearance: none;
 }
 
 .login input[type="password"] {
@@ -192,7 +188,7 @@ const submit = () => {
 .ui {
     font-weight: bolder;
     background: -webkit-linear-gradient(#b563ff, #535efc, #0ec8ee);
-    -webkit-background-clip: text;
+    // -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     border-bottom: 4px solid transparent;
     border-image: linear-gradient(0.25turn, #535efc, #0ec8ee, #0ec8ee);
