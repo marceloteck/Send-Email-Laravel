@@ -29,7 +29,8 @@
                     :disabled="form.processing"
                 />
             </form>
-            <Link :href="route('register')">Não tem cadastro?</Link>
+            <div class="LinkInfo"> <Link :href="route('register')">Não tem cadastro?</Link> </div>
+            
         </div>
     </main>
 </template>
@@ -82,7 +83,7 @@ const submit = () => {
 };
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .mainLogin {
     position: relative;
     width: 100%;
@@ -96,7 +97,7 @@ const submit = () => {
 .login {
     position: relative;
     width: 340px;
-    height: 400px;
+    height: 420px;
     background: #ffffff;
     /* background: #2c2c2c; */
     padding: 47px;
@@ -132,9 +133,25 @@ const submit = () => {
     /* -webkit-appearance: none; */
 }
 
+.LinkInfo {
+    width: 100%;
+    padding: 0px !important;
+    margin:  30px 0 0 0 !important;
+    text-align: center;
+    
+    a, Link{
+        text-decoration: none;
+        color: #1b1b1b;
+        font-size: 1rem;
+    }
+    a:hover, Link:hover{
+        text-decoration: underline;
+    }
+}
+
 .login input[type="submit"],
 .login input[type="button"],
-.h1Ln {
+.h1Ln, .LinkInfo {
     border: 0;
     outline: 0;
     width: 100%;
@@ -145,7 +162,7 @@ const submit = () => {
     animation: bounce2 1.6s;
 }
 
-.h1Ln {
+.h1Ln, .LinkInfo {
     padding: 0;
     position: relative;
     top: -35px;
