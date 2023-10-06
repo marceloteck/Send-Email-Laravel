@@ -46,6 +46,15 @@
                             >Cadastrar</Link
                         >
                     </li>
+                    <li class="nav-item" v-if="props.isLoggindStatus">
+                        <Link
+                            class="nav-link"
+                            :href="route('logout')"
+                            method="post"
+                            as="button"
+                            >Sair</Link
+                        >
+                    </li>
                 </ul>
             </div>
         </div>
@@ -53,8 +62,8 @@
 </template>
 
 <script setup>
-const props = defineProps(["canLogin", "canRegister"]);
-console.log(props.canRegister);
+const props = defineProps(["canLogin", "canRegister", "isLoggindStatus"]);
+console.log(props.isLoggindStatus);
 </script>
 
 <style lang="scss">
