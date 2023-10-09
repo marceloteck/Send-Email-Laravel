@@ -12,6 +12,7 @@ Route::post('/edit', [SendEmailProController::class, 'SendEmail'])->name('SendEm
 
 Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('index.admin');
+    Route::get('/new-email', [AdminController::class, 'newEmail'])->name('index.newEmail');
 });
 
 

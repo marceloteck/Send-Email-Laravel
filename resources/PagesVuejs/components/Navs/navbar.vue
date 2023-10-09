@@ -63,7 +63,6 @@
 
 <script setup>
 const props = defineProps(["canLogin", "canRegister", "isLoggindStatus"]);
-console.log(props.isLoggindStatus);
 </script>
 
 <style lang="scss">
