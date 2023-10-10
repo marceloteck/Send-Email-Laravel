@@ -1,89 +1,103 @@
 <template>
     <AppHead title="Administração do email" />
-    <navbar :isLoggindStatus="props.isLoggindStatus" />
-    <main>
-        <div class="container emailBox">
-            <div class="row">LINHA A CIMA</div>
-            <div class="row">
-                <div class="col-12 col-xl-3 card-item">
-                    <div class="barraMenu">BARRAMENU</div>
-                    <div class="bodyItensMenu">corpoMenu</div>
+    <LayoutEmailAdmin>
+        <template v-slot:topAbout>
+            <div class="row send">
+                <div class="col-11">
+                    <input
+                        type="text"
+                        placeholder="Suporta varios e-mail separados por virgula"
+                        class="inputEmail"
+                    />
                 </div>
-                <div class="col-12 col-xl-9 card-item">
-                    <div class="barraMenu">MENUBARRA</div>
-                    <div class="boxItemMenu">CORPO DO EMAIL</div>
+                <div class="col-1">
+                    <button type="button" class="btn btn-success">
+                        Enviar
+                    </button>
                 </div>
             </div>
-        </div>
-    </main>
+        </template>
+        <template v-slot:barraMenu2>
+            <div class="info">
+                <input
+                    type="text"
+                    placeholder="Escreva um assunto"
+                    class="inputAssunto"
+                />
+            </div>
+        </template>
+        <template v-slot:bodyContent>
+            <div class="contentEmail">
+                <button type="button" class="btn btnSendEmail">
+                    Escolher modelo
+                </button>
+            </div>
+        </template>
+    </LayoutEmailAdmin>
 </template>
 
 <script setup>
 const props = defineProps(["isLoggindStatus"]);
-
-function corrigirEmail(email) {
-    const username = email.split("@")[0];
-    const regex = /[.\-_]/g;
-    const usernameCorrigido = username.replace(regex, " ");
-    return usernameCorrigido;
-}
-
-// const emailEnviado = "Dennis.kumagai@wayon.global";
-const emailEnviado = "marcellosh_12@hotmail.com";
-const ViewSend = corrigirEmail(emailEnviado);
 </script>
 
-<style lang="scss">
-.emailBox {
-    padding-top: 30px;
+<style lang="scss" scoped>
+.send {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    .inputEmail {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 9px;
+        border-radius: 4px;
+        border: 0.8px solid #ece9e9;
+        display: flex;
+    }
+    .inputEmail:focus,
+    .inputEmail:active {
+        outline: none !important;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+.info {
+    width: 100%;
+    display: flex;
 
-    .row {
-        justify-content: space-between !important;
+    .inputAssunto {
+        position: relative;
+        width: 100%;
+        padding: 15px;
+        border: 0.8px solid transparent;
+        background: transparent;
+        margin-top: 2px;
+        font-size: 1.3em;
+        color: #3c3939;
+    }
+    .inputAssunto:focus,
+    .inputAssunto:focus-visible {
+        outline: none;
+        box-shadow: none;
+        border-color: transparent;
+        color: #000;
+    }
+}
+.contentEmail {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 
-        .boxItemMenu {
-            width: 100;
-            height: 100%;
-        }
-
-        .card-item {
-            // background-color: #ffffff;
-            border: 0.01rem solid rgba(223, 222, 218, 0.5);
-            border-radius: 3px;
-            min-height: 75vh;
-            height: auto;
-            padding: 0px;
-            padding-bottom: 25px;
-
-            .barraMenu {
-                background: rgb(224, 224, 224);
-                background: linear-gradient(
-                    350deg,
-                    rgba(224, 224, 224, 1) 0%,
-                    rgba(180, 171, 171, 1) 100%
-                );
-                display: flex;
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-content: stretch;
-                justify-content: flex-end;
-                align-items: baseline;
-                width: 100%;
-                height: 60px;
-                border-radius: 3px 3px 0px 0px;
-                a,
-                Link {
-                    text-decoration: none;
-                    color: #212529;
-                }
-            }
-            .bodyItensMenu {
-                position: relative;
-                width: 100%;
-            }
-        }
-        .col-3 {
-            position: relative;
-        }
+    .btnSendEmail {
+        background-color: #000;
+        color: #ece9e9;
+        height: fit-content;
     }
 }
 </style>

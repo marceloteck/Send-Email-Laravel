@@ -1,54 +1,63 @@
 <template>
     <AppHead title="Administração do email" />
-    <LayoutEmailAdmin>
-        <template v-slot:topAbout>
-            <h2>
-                <i class="fa fa-check-square-o"></i> Este é o sobre usado para
-                enviar o email
-                <span class="iconTime">
-                    <i class="fa fa-external-link"></i>
-                </span>
-            </h2>
-        </template>
-        <template v-slot:barraMenu1>
-            <Link :href="route('index.newEmail')">
-                <div class="icon"><i class="fa fa-edit"></i></div>
-            </Link>
-            <div class="icon"><i class="fa fa-trash"></i></div>
-            <div class="icon"><i class="fa fa-th-list"></i></div>
-        </template>
-        <template v-slot:barraMenu2>
-            <div class="start">
-                <div class="emailSend">
-                    Email enviado para
-                    <strong>{{ emailEnviado }}</strong>
-                </div>
-                <div class="endContent">
-                    <span class="title" title="09 de Outubro de 2023 ">
-                        12:24 (há 12 horas)
-                    </span>
-                </div>
+    <navbar :isLoggindStatus="props.isLoggindStatus" />
+    <main>
+        <div class="container emailBox">
+            <div class="row">
+                <h2>
+                    <i class="fa fa-check-square-o"></i> Este é o sobre usado
+                    para enviar o email
+
+                    <span class="iconTime"
+                        ><i class="fa fa-external-link"></i
+                    ></span>
+                </h2>
             </div>
-        </template>
-        <template v-slot:bodyMenuLeft>
-            <div class="cardEmail" v-for="link in 5" :key="link">
-                <div class="container">
-                    <div class="title">{{ ViewSend }}</div>
-                    <div class="icon">
-                        <i class="fa fa-trash"></i>
+            <div class="row">
+                <div class="col-12 col-xl-3 card-item">
+                    <div class="barraMenu">
+                        <Link :href="route('index.newEmail')"
+                            ><div class="icon"><i class="fa fa-edit"></i></div
+                        ></Link>
+                        <div class="icon"><i class="fa fa-trash"></i></div>
+                        <div class="icon"><i class="fa fa-th-list"></i></div>
+                    </div>
+                    <div class="cardEmail" v-for="link in 5" :key="link">
+                        <div class="container">
+                            <div class="title">{{ ViewSend }}</div>
+                            <div class="icon">
+                                <i class="fa fa-trash"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-9 card-item">
+                    <div class="barraMenu">
+                        <div class="start">
+                            <div class="emailSend">
+                                Email enviado para
+                                <strong>{{ emailEnviado }}</strong>
+                            </div>
+                            <div class="endContent">
+                                <span
+                                    class="title"
+                                    title="09 de Outubro de 2023 "
+                                    >12:24 (há 12 horas)</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="boxItemMenu">
+                        <iframe
+                            :src="route('viewEmail')"
+                            frameborder="0"
+                            style="width: 100%; height: 100%"
+                        ></iframe>
                     </div>
                 </div>
             </div>
-        </template>
-        <template v-slot:bodyContent>
-            <iframe
-                :src="route('viewEmail')"
-                frameborder="0"
-                style="width: 100%; height: 100%"
-            >
-            </iframe>
-        </template>
-    </LayoutEmailAdmin>
+        </div>
+    </main>
 </template>
 
 <script setup>
@@ -68,7 +77,11 @@ const ViewSend = corrigirEmail(emailEnviado);
 
 <style lang="scss">
 .emailBox {
+    padding-top: 30px;
+
     .row {
+        justify-content: space-between !important;
+
         h2 {
             font-weight: 400;
             font-size: 2rem;
@@ -80,6 +93,11 @@ const ViewSend = corrigirEmail(emailEnviado);
                 margin-right: 5px;
                 font-size: 1.5rem;
             }
+        }
+
+        .boxItemMenu {
+            width: 100;
+            height: 100%;
         }
 
         .card-item {
@@ -201,6 +219,9 @@ const ViewSend = corrigirEmail(emailEnviado);
                     z-index: 1;
                 }
             }
+        }
+        .col-3 {
+            position: relative;
         }
     }
 }

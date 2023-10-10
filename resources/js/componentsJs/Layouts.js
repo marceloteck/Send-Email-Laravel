@@ -1,6 +1,6 @@
 // Importar componentes 
-//import ExemploLayout from '@PagesVuejs/Layouts/ExemploLayout.vue';
+import LayoutEmailAdmin from '@PagesVuejs/components/Layouts/LayoutEmailAdmin.vue';
 
-const Layouts = { };
+const Layouts = { LayoutEmailAdmin };
 
 export default Layouts;

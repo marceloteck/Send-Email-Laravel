@@ -1,16 +1,18 @@
 <template>
-    <navbar :isLoggindStatus="props.isLoggindStatus" />
+    <navbar />
     <main>
         <div class="container emailBox">
-            <div class="row">LINHA A CIMA</div>
+            <div class="row"><slot name="topAbout" /></div>
             <div class="row">
                 <div class="col-12 col-xl-3 card-item">
-                    <div class="barraMenu">BARRAMENU</div>
-                    <div class="bodyItensMenu">corpoMenu</div>
+                    <div class="barraMenu"><slot name="barraMenu1" /></div>
+                    <div class="bodyItensMenu">
+                        <slot name="bodyMenuLeft" />
+                    </div>
                 </div>
                 <div class="col-12 col-xl-9 card-item">
-                    <div class="barraMenu">MENUBARRA</div>
-                    <div class="boxItemMenu">CORPO DO EMAIL</div>
+                    <div class="barraMenu"><slot name="barraMenu2" /></div>
+                    <div class="boxItemMenu"><slot name="bodyContent" /></div>
                 </div>
             </div>
         </div>
@@ -18,7 +20,7 @@
 </template>
 
 <script setup>
-const props = defineProps(["isLoggindStatus"]);
+// const props = defineProps(["isLoggindStatus"]);
 </script>
 
 <style lang="scss">
