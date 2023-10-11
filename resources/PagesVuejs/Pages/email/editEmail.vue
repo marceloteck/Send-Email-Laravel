@@ -28,7 +28,7 @@
 const props = defineProps({ resposta: String, status: String });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
     padding-top: 30px;
 

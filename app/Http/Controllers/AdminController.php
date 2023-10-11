@@ -9,11 +9,13 @@ class AdminController extends Controller
 {
     public $indexAdmin;
     public $newEmail;
+    public $modeloEmail;
     public $Authentication;
     public function __construct()
     {
         $this->indexAdmin = 'Pages/admin/index';
         $this->newEmail = 'Pages/admin/newEmail';
+        $this->modeloEmail = 'Pages/admin/modeloEmail';
         $this->Authentication = auth()->check();
     }
 
@@ -26,5 +28,9 @@ class AdminController extends Controller
     public function newEmail()
     {
         return Inertia::render($this->newEmail);
+    }
+    public function modeloEmail()
+    {
+        return Inertia::render($this->modeloEmail);
     }
 }
