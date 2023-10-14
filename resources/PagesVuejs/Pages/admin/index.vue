@@ -61,12 +61,15 @@ function corrigirEmail(email) {
     return usernameCorrigido;
 }
 
-// const emailEnviado = "Dennis.kumagai@wayon.global";
 const emailEnviado = "marcellosh_12@hotmail.com";
 const ViewSend = corrigirEmail(emailEnviado);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+$coricon: #ffffff;
+$corHover: #212529;
+$backgrounHoverBtn: #4f4e61;
+
 .emailBox {
     .row {
         h2 {
@@ -110,7 +113,6 @@ const ViewSend = corrigirEmail(emailEnviado);
                 a,
                 Link {
                     text-decoration: none;
-                    color: #212529;
                 }
                 .icon {
                     width: fit-content;
@@ -120,6 +122,7 @@ const ViewSend = corrigirEmail(emailEnviado);
                     padding: 25px;
                     cursor: pointer;
                     height: 60px;
+                    color: $coricon;
                     .fa {
                         font-size: 1.3rem;
                     }
@@ -128,9 +131,10 @@ const ViewSend = corrigirEmail(emailEnviado);
                     background-color: rgb(175, 174, 174);
                     background: linear-gradient(
                         350deg,
-                        rgba(rgb(208, 204, 204), 1) 0%,
-                        rgb(175, 174, 174) 100%
+                        rgba(rgb(115, 114, 145), 1) 0%,
+                        rgb(97, 96, 120) 100%
                     );
+                    color: $coricon;
                 }
                 .start {
                     width: 100%;
@@ -139,6 +143,7 @@ const ViewSend = corrigirEmail(emailEnviado);
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    color: $coricon;
 
                     .emailSend {
                         position: relative;
@@ -185,6 +190,7 @@ const ViewSend = corrigirEmail(emailEnviado);
                         transition: all 0.2s ease-in-out;
                         opacity: 0;
                         z-index: -1;
+                        color: #ffffff;
                     }
                 }
             }
@@ -199,6 +205,7 @@ const ViewSend = corrigirEmail(emailEnviado);
                     margin-right: 0px;
                     opacity: 1;
                     z-index: 1;
+                    color: $corHover;
                 }
             }
         }

@@ -2,9 +2,10 @@
     <AppHead title="Administração do email" />
     <LayoutEmailAdmin>
         <template v-slot:topAbout>
-            <div class="row send">
+            <div class="send">
                 <div class="col-11">
-                    <input
+                    <VueTagsInput
+                        ref="tagsInput"
                         type="text"
                         placeholder="Suporta varios e-mail separados por virgula"
                         class="inputEmail"
@@ -19,25 +20,30 @@
         </template>
         <template v-slot:bodyMenuLeft>
             <div class="container">
-                <form @submit.prevent="SubmitSend">
+                <form>
                     <div
                         class="group"
                         v-for="item in inputItens"
                         :key="item.name"
                     >
-                        <input
-                            v-model="formSend[item.name]"
-                            required
-                            :name="item.name"
-                            :id="item.title"
-                            class="input"
-                            type="text"
-                        />
-                        <span class="highlight"></span>
-                        <span class="bar"></span>
-                        <label>{{ item.title }}</label>
+                        <span v-if="formSend[item.name]">
+                            <input
+                                v-model="formSend[item.name]"
+                                readonly
+                                required
+                                :name="item.name"
+                                :id="item.title"
+                                class="input"
+                                type="text"
+                            />
+                            <span class="highlight"></span>
+                            <span class="bar"></span>
+                            <label>{{ item.title }}</label>
+                        </span>
                     </div>
-                    <button type="submit" class="sendbtn btn">Enviar</button>
+                    <button type="button" class="sendbtn btn">
+                        Editar Informações
+                    </button>
                 </form>
             </div>
         </template>
@@ -65,23 +71,24 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useForm, router } from "@inertiajs/vue3";
+
 const props = defineProps({
     resposta: String,
     status: String,
-    isLoggindStatus: String,
+    tableProfessional: Array,
 });
 
 const formSend = useForm({
-    name: "",
-    job: "",
-    email: "",
-    whatsapp: "",
-    codtecno: "",
-    linkedin: "",
-    github: "",
-    facebook: "",
+    name: props.tableProfessional[0].name,
+    job: props.tableProfessional[0].job,
+    email: props.tableProfessional[0].email,
+    whatsapp: formatPhoneNumber(props.tableProfessional[0].whatsapp),
+    codtecno: props.tableProfessional[0].codtecno,
+    linkedin: props.tableProfessional[0].linkedin,
+    github: props.tableProfessional[0].github,
+    facebook: props.tableProfessional[0].facebook,
 });
 
 const inputItens = [
@@ -107,28 +114,37 @@ const Toast = Swal.mixin({
     },
 });
 
-const SubmitSend = () => {
-    try {
-        router.post(route("SendEmail"), formSend, {
-            onBefore: (visit) => {},
-            onStart: (visit) => {},
-            onProgress: (progress) => {},
-            onSuccess: (page) => {
-                Toast.fire({ icon: props.status, title: props.resposta });
-            },
-            onError: (errors) => {
-                Toast.fire({ icon: props.status, title: props.resposta });
-            },
-            onCancel: () => {},
-            onFinish: (visit) => {},
-        });
-    } catch (error) {
-        Toast.fire({
-            icon: "error",
-            title: "Atualize a página, ocorreu algum erro!",
-        });
+function formatPhoneNumber(number) {
+    const cleanedNumber = String(number).replace(/\D/g, "");
+    const match = cleanedNumber.match(/^(\d{2})(\d{4,5})(\d{4})$/);
+    if (match) {
+        return `(${match[1]}) ${match[2]}-${match[3]}`;
     }
-};
+    return number;
+}
+
+// const SubmitSend = () => {
+//     try {
+//         router.post(route("SendEmail"), formSend, {
+//             onBefore: (visit) => {},
+//             onStart: (visit) => {},
+//             onProgress: (progress) => {},
+//             onSuccess: (page) => {
+//                 Toast.fire({ icon: props.status, title: props.resposta });
+//             },
+//             onError: (errors) => {
+//                 Toast.fire({ icon: props.status, title: props.resposta });
+//             },
+//             onCancel: () => {},
+//             onFinish: (visit) => {},
+//         });
+//     } catch (error) {
+//         Toast.fire({
+//             icon: "error",
+//             title: "Atualize a página, ocorreu algum erro!",
+//         });
+//     }
+// };
 
 function openLink(link) {
     const width = 800; // Largura desejada da janela
@@ -142,6 +158,20 @@ function openLink(link) {
 </script>
 
 <style lang="scss" scoped>
+.sendbtn {
+    position: relative;
+    margin-top: 25px;
+    background: rgba(83, 82, 116, 1);
+    color: #fff;
+    width: 100%;
+}
+.sendbtn:hover {
+    background: rgba(83, 82, 116, 0.8);
+    color: #fff;
+}
+.row {
+    padding-right: 0px !important;
+}
 .send {
     width: 100%;
     position: relative;
@@ -150,6 +180,7 @@ function openLink(link) {
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-between;
+
     .inputEmail {
         width: 100%;
         margin-bottom: 15px;
@@ -164,7 +195,15 @@ function openLink(link) {
     }
     .btn {
         width: 100%;
+        padding: 9px;
+        border-radius: 0px 3px 3px 0px;
     }
+}
+
+.input ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: #5264ae;
 }
 .info {
     width: 100%;
@@ -178,14 +217,17 @@ function openLink(link) {
         background: transparent;
         margin-top: 2px;
         font-size: 1.3em;
-        color: #3c3939;
+        color: #ffffff;
     }
     .inputAssunto:focus,
     .inputAssunto:focus-visible {
         outline: none;
         box-shadow: none;
         border-color: transparent;
-        color: #000;
+        color: rgb(255, 255, 255);
+    }
+    .inputAssunto::placeholder {
+        color: rgba(255, 255, 255, 0.6);
     }
 }
 .contentEmail {

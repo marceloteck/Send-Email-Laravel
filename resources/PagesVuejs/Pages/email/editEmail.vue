@@ -25,7 +25,10 @@
 </template>
 
 <script setup>
-const props = defineProps({ resposta: String, status: String });
+const props = defineProps({
+    resposta: String,
+    status: String,
+});
 </script>
 
 <style lang="scss" scoped>

@@ -1,92 +1,190 @@
 <template>
-    <div class="content">
-        <div class="card" v-for="card in 5" :key="card">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path
-                    d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"
-                ></path>
-            </svg>
-            <div class="card__content">
-                <p class="card__title">Card Title</p>
-                <p class="card__description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco.
-                </p>
+    <AppHead title="Modelos de email" />
+    <main>
+        <div class="navItem">
+            <h4 class="text-center">Escolha um modelo de E-mail</h4>
+        </div>
+        <div class="container content">
+            <div
+                v-for="x in 13"
+                :key="x"
+                @click="selectCard(x)"
+                :class="['template', { selected: validationCard(x) }]"
+            >
+                <div class="selectItem">
+                    <checkbox :selected="validationCard(x)" />
+                </div>
+                <img
+                    src="https://mjml.io/assets/img/index/austin.png"
+                    alt="Escolha um modelo"
+                />
+                <div class="thumb_gallery">
+                    <h4>Sexta-feira preta</h4>
+                    <p class="ModelEmaildesc">
+                        Um boletim informativo responsivo com ROI otimizado para
+                        a Black Friday.
+                    </p>
+                    <div class="author-profile">
+                        <a href="https://mjml.io/templates" target="_blank">
+                            Acessar Mjml
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="config">
+            <Link href="#">Criar novo modelo</Link>
+            <button type="button" class="btn btnSend">Escolher</button>
+        </div>
+    </main>
 </template>
+<script setup>
+import { ref } from "vue";
 
-<style lang="css" scoped>
-.content {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-bottom: 3rem;
-}
-.card {
-    position: relative;
-    width: 350px;
-    height: 200px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    perspective: 1000px;
-    box-shadow: 0 0 0 5px #ffffff80;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    margin-top: 1rem;
-}
+const selectedCard = ref(false);
 
-.card svg {
-    width: 48px;
-    fill: #333;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+const props = defineProps({
+    modelosModel: {
+        type: Object,
+        required: true,
+    },
+});
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+function selectCard(card) {
+    selectedCard.value = card;
 }
-
-.card__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #f2f2f2;
-    transform: rotateX(-90deg);
-    transform-origin: bottom;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+function validationCard(value) {
+    return value === selectedCard.value;
 }
+</script>
 
-.card:hover .card__content {
-    transform: rotateX(0deg);
-}
+<style lang="scss" scoped>
+main {
+    padding-bottom: 35px;
+    .navItem {
+        width: 100%;
+        padding: 10px;
+        background-color: #ccc;
+        border-bottom: rgb(136, 136, 136);
+    }
+    .content {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
 
-.card__title {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-    font-weight: 700;
-}
+        .selected {
+            box-shadow: 2px 2px 5px rgba(106, 105, 224, 0.9) !important;
+            border: 1px solid rgb(92, 123, 18) !important;
+        }
 
-.card:hover svg {
-    scale: 0;
-}
+        .template {
+            margin-top: 50px;
+            margin-bottom: 10px;
+            width: 317px;
+            height: 409px;
+            border: 1px solid #e8e7e6;
+            border-radius: 3px;
+            position: relative;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
 
-.card__description {
-    margin: 10px 0 0;
-    font-size: 14px;
-    color: #777;
-    line-height: 1.4;
+            .selectItem {
+                position: absolute;
+                top: 0px;
+                padding: 10px;
+            }
+
+            .thumb_gallery {
+                border-top: 1px solid #e8e7e6;
+                padding: 20px;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                background-color: #fff;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+                min-height: 110px;
+
+                .author-profile {
+                    position: absolute;
+                    width: 90%;
+                    bottom: 10px;
+                    a {
+                        color: #848484;
+                        font-weight: 500;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            img {
+                width: 100%;
+            }
+            h4 {
+                font-size: 18px;
+                line-height: 31px;
+                text-align: left;
+                margin: 0 0 0 10px;
+            }
+            .ModelEmaildesc {
+                font-size: 13px;
+                line-height: 22px;
+                color: #afafaf;
+                margin: 0 0 0 10px;
+                overflow: hidden;
+                height: 0;
+                -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
+            }
+            &:hover .ModelEmaildesc {
+                height: 75px;
+            }
+        }
+    }
+    .config {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        padding: 5px 25px 5px 5px;
+        background: linear-gradient(45deg, #dddddd, #cacaca);
+        border-top: #848484;
+        display: flex;
+
+        Link,
+        a {
+            text-decoration: none;
+            color: #222222;
+            background-color: #868686;
+            height: 100%;
+        }
+
+        .btnSend {
+            background: linear-gradient(45deg, #ccc, #cacaca);
+            transition: background-color 0.3s;
+            float: right;
+            padding: 15px 30px 15px 30px;
+            font-weight: 600;
+            border: 0.8px solid #848484;
+
+            &:hover {
+                background: linear-gradient(45deg, #ccc, #868686);
+            }
+            &:active {
+                box-shadow: none;
+                background-color: #868686;
+            }
+        }
+    }
 }
 </style>

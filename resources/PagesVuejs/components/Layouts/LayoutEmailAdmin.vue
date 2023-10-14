@@ -23,7 +23,7 @@
 // const props = defineProps(["isLoggindStatus"]);
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .emailBox {
     padding-top: 30px;
 
@@ -42,13 +42,14 @@
             height: auto;
             padding: 0px;
             padding-bottom: 25px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 
             .barraMenu {
                 background: rgb(224, 224, 224);
                 background: linear-gradient(
                     350deg,
-                    rgba(224, 224, 224, 1) 0%,
-                    rgba(180, 171, 171, 1) 100%
+                    rgba(70, 69, 97, 0.7) 0%,
+                    rgb(59, 58, 90) 100%
                 );
                 display: flex;
                 flex-direction: row;
