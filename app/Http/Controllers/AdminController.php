@@ -12,6 +12,7 @@ class AdminController extends Controller
     public $indexAdmin;
     public $newEmail;
     public $modeloEmail;
+    public $newModeloEmail;
     public $Authentication;
     public $tableProfessional;
     public $modelosModel;
@@ -21,6 +22,7 @@ class AdminController extends Controller
         $this->indexAdmin = 'Pages/admin/index';
         $this->newEmail = 'Pages/admin/newEmail';
         $this->modeloEmail = 'Pages/admin/modeloEmail';
+        $this->newModeloEmail = 'Pages/admin/newModeloEmail';
         $this->Authentication = auth()->check();
         $this->tableProfessional = professionalModel::all();
         $this->modelosModel = modelosModel::all();
@@ -43,5 +45,9 @@ class AdminController extends Controller
         return Inertia::render($this->modeloEmail, [
             'modelosModel' => $this->modelosModel,
         ]);
+    }
+    public function newModeloEmail()
+    {
+        return Inertia::render($this->newModeloEmail);
     }
 }

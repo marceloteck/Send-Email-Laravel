@@ -126,7 +126,7 @@ function autoFocusInput() {
     align-items: center;
 
     .placeholderInfo {
-        color: #000;
+        color: #424160;
         width: fit-content;
         position: absolute;
         padding-left: 8px;

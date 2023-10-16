@@ -8,10 +8,11 @@
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
         "@tailwindcss/forms": "^0.5.3",
+        "@types/mjml": "^4.7.2",
         "@vitejs/plugin-vue": "^4.0.0",
         "@voerro/vue-tagsinput": "^2.7.1",
         "autoprefixer": "^10.4.12",
-        "axios": "^1.1.2",
+        "axios": "^1.5.1",
         "laravel-vite-plugin": "^0.8.0",
         "postcss": "^8.4.18",
         "sass": "^1.66.1",
@@ -23,6 +24,7 @@
         "@popperjs/core": "^2.11.8",
         "@vitejs/plugin-vue": "^4.3.4",
         "bootstrap": "^5.3.1",
+        "grapesjs-mjml": "^1.0.5",
         "vue": "^3.2.36"
     }
 }

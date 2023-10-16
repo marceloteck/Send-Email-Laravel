@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="config">
-            <Link href="#">Criar novo modelo</Link>
+            <Link :href="route('index.newModeloEmail')">Criar novo modelo</Link>
             <button type="button" class="btn btnSend">Escolher</button>
         </div>
     </main>
@@ -60,7 +60,7 @@ function validationCard(value) {
 
 <style lang="scss" scoped>
 main {
-    padding-bottom: 35px;
+    padding-bottom: 65px;
     .navItem {
         width: 100%;
         padding: 10px;
@@ -160,13 +160,17 @@ main {
         background: linear-gradient(45deg, #dddddd, #cacaca);
         border-top: #848484;
         display: flex;
+        justify-content: space-between;
 
         Link,
         a {
             text-decoration: none;
             color: #222222;
-            background-color: #868686;
-            height: 100%;
+            padding: 25px;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         .btnSend {
