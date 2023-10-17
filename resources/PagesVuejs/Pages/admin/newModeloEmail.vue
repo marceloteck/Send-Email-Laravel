@@ -4,3 +4,8 @@
         <MjmlEditor />
     </div>
 </template>
+
+<script setup>
+const props = defineProps(["request"]);
+console.log(props.request);
+</script>

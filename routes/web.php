@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/new-email', [AdminController::class, 'newEmail'])->name('index.newEmail');
     Route::get('/modelo-email', [AdminController::class, 'modeloEmail'])->name('index.modeloEmail');
     Route::get('/new-modelo-email', [AdminController::class, 'newModeloEmail'])->name('index.newModeloEmail');
+    Route::post('/new-modelo-email', [AdminController::class, 'postModeloEmail'])->name('index.postModeloEmail');
 });
 
 // Route::get('/teste', function () {

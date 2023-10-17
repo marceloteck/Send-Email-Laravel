@@ -9,13 +9,8 @@ use Inertia\Inertia;
 
 class AdminController extends Controller
 {
-    public $indexAdmin;
-    public $newEmail;
-    public $modeloEmail;
-    public $newModeloEmail;
-    public $Authentication;
-    public $tableProfessional;
-    public $modelosModel;
+    public $indexAdmin, $newEmail, $modeloEmail, $newModeloEmail;
+    public $Authentication, $tableProfessional, $modelosModel;
 
     public function __construct()
     {
@@ -49,5 +44,9 @@ class AdminController extends Controller
     public function newModeloEmail()
     {
         return Inertia::render($this->newModeloEmail);
+    }
+    public function postModeloEmail(Request $request)
+    {
+        return response()->json($request->all());
     }
 }
